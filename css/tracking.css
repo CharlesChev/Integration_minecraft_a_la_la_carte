@@ -1,0 +1,6 @@
+p { font-size: 20px; }
+#tracking_map_container {
+    width: auto ;
+    position: inherit ;
+    height: 500px ;
+}

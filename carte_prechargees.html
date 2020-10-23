@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<!--  ,--.
+      \  _\_
+      _\/_|_\____/\
+    -(___.--._____( Copyright (c) 2020 IGN
+         \   \
+          \   \
+           `--'  -->
+
+<!--<?php
+require_once(dirname(__FILE__) . "/inc/utilities.php");
+require_once(dirname(__FILE__) . "/inc/db_params.php");
+@$mysql_handle = connectToPDO_DB();
+$selected_data = @$mysql_handle->prepare("SELECT value FROM counters WHERE name=:name");
+@$selected_data->execute(array(":name"=>"maintenance_mode"));
+$value = $selected_data->fetch(PDO::FETCH_ASSOC)["value"];
+@mysqli_close($mysql_handle);
+$mysql_handle = null;
+if($value != 0) {
+    http_response_code(503);
+    include('503.html');
+    exit();
+}
+?> -->
+<html lang="fr">
+    <head>
+        <title>Minecraft&reg; à la carte</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
+        <link rel="shortcut icon" href="img/favicon.ico" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:title" content="Minecraft&reg; à la carte" />
+        <meta property="og:description" content="Générez vos cartes Minecraft à partir de vos lieux favoris." />
+        <meta property="og:url" content="https://minecraft.ign.fr/" />
+        <meta property="og:image" content="https://minecraft.ign.fr/img/open_graph_bg.png" />
+        <meta name="geo.region" content="FR" />
+        <meta name="geo.placename" content="Saint-Mandé" />
+        <meta name="geo.position" content="48.84559;2.425199" />
+        <meta name="ICBM" content="48.84559, 2.425199" />
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">       
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,700">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Tangerine:400,700">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="screen">-->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/ol.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+        <link rel="stylesheet" type="text/css" href="css/pretty-checkbox.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jspanel.min.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/style-particulier.css">
+    </head>
+
+    <body>
+        <html>
+            <header class="header header-principal" role="banner">
+                <div class="header-principal--left">
+                    <div class="header-principal__logo">
+                        <a href="#" class="header-principal__logo-link" title="Accueil IGN Nom du site web">
+                            <img src="img/logo.png" alt="IGN" width="65" height="30">
+                            <span class="header-principal__name">Minecraft à la carte</span>            </a>
+                        </div>
+                        <div class="header-principal__nav">
+
+                            <nav class="navbar navbar--mobile navbar-light" role="navigation" aria-label="Menu principal mobile" tabindex="-1" id="menuPrincipalMobileTarget">
+                                <button class="navbar-toggler btn--plain btn--primary" data-toggle="collapse" type="button" data-target="#collapse-menu" aria-controls="#collapse-menu" aria-expanded="true">
+                                    <span class="navbar-toggler--icon icon-burger" aria-hidden="true"></span>
+                                    <span class="navbar-toggler--text">Menu</span>
+                                </button>
+
+                                <div class="navbar-collapse" id="menuPrincipalMobile">
+                                    <button class="navbar-toggler-close btn-close" type="button" data-toggle="collapse" data-target="#collapse-menu" aria-controls="#collapse-menu" aria-expanded="true">
+                                        <span class="icon-close" aria-hidden="true"></span>
+                                        <span class="sr-only">Fermer le menu</span>
+                                    </button>
+
+
+
+
+
+                                    <ul class="navbar-nav navbar-nav--portails" id='collapse-menu'>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="index.html">Accueil</a>
+                                        </li>
+                                        <li class="nav-item is-active">
+                                            <a class="nav-link" href="carte_prechargees.html">Cartes préchargées</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">En savoir plus</a>
+                                        </li>
+                                    </ul>
+
+
+
+                                    <ul class="navbar-nav navbar-nav--lang">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">EN</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link external-link" href="#" target="_blank" title="EN (Nouvelle fenêtre)">EN<span class="icon-external-link" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+
+
+                                    <div class="navbar-nav">
+                                        <div class="nav-item">
+
+                                            <!-- the modal "access" is after the footer in the DOM -->
+                                            <button type="button" class="btn btn-icon--mobile" data-toggle="modal" data-target="#modalAccess">
+                                                <span class="icon-access" aria-hidden="true"></span>
+                                                <span>Paramètres d'accessibilité</span>
+                                            </button>
+
+                                        </div>
+
+                                        <div class="nav-item">
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </nav>
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="header-principal--right">
+                        <nav class="navbar--desktop" role="navigation" aria-label="Menu Portails">
+
+                            <ul class="navbar-nav navbar-nav--portails">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Accueil</a>
+                                </li>
+                                <li class="nav-item is-active">
+                                    <a class="nav-link" href="#">Cartes préchargées <span class="sr-only">(page courante)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">En savoir plus</a>
+                                </li>
+                            </ul>
+
+                        </nav>
+
+
+                        <div class="header-principal__lang navbar--desktop">
+                            <ul class="navbar-nav navbar-nav--lang">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">EN</a>
+                                </li>
+                            
+                                <li class="nav-item">
+                                    <a class="nav-link external-link" href="#" target="_blank" title="EN (Nouvelle fenêtre)">EN<span class="icon-external-link" aria-hidden="true"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <!-- the modal "access" is after the footer in the DOM -->
+                        <button type="button" class="btn btn-icon--header d-none d-lg-block" data-toggle="modal" data-target="#modalAccess">
+                            <span class="icon-access" aria-hidden="true"></span>
+                            <span class="sr-only">Paramètres d'accessibilité</span>
+                        </button>
+
+
+                        <nav role="navigation" aria-label="Megamenu" id="megamenu">
+                            <button type="button" class="btn btn-icon--header" data-toggle="modal" data-target="#modalMegamenu">
+                                <span class="icon-megamenu" aria-hidden="true"></span>
+                                <span class="sr-only">Megamenu</span>
+                            </button>
+                        </nav>
+                    </div>
+            </header>
+
+            <header class="o-page-title o-page-title--bg o-page-title--home">
+                <div class="o-page-title__inner">
+                    <div class="container-content container-content--smaller">
+                        <h1>Cartes préchargées</h1><p class="lead">Localisez ou téléchargez des cartes déjà générées</p>
+                    </div>
+                    <div class="m-media-background">
+                            <picture>
+                                <source media="(min-width: 62em)" srcset="http://placeimg.com/1400/500/nature 1400w,">
+                                <source media="(min-width: 48em)" srcset="http://placeimg.com/991/500/tech 991w,">
+                               <img src="http://placeimg.com/767/506/nature" alt="">
+                        </picture>
+
+                    </div>
+                </div>
+            </header>
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <main class = 'cartespregen'>
+            <div class="container-content ">       
+                <div class="o-teasers__grid o-teasers--3by3">
+
+                    <div class="o-teasers__item">
+                        <article class="o-teaser
+                        o-teaser--hasImg o-teaser--hasTag">
+                            <a class="o-teaser__inner" href="#">
+                                <div class="o-teaser__img">
+                                    <img srcset="http://placeimg.com/708/398/arch 708w,
+                                    http://placeimg.com/400/225/nature 400w" sizes="(min-width: 48em) 400px,
+                                    708px" src="http://placeimg.com/708/398/nature" alt="">
+                                </div>
+                                <div class="o-teaser__content">
+                                    <h3 class="o-teaser__title">Parc de la tête d'or</h3><p class="o-teaser__lead"> Lyon</p>
+                                    <div class="o-teasers__item_links">   
+                                        <p class="o-teasers__btn text-center">
+                                            <a href="#" class="btn btn--ghost btn--primary btn-active-effect btn-width--sm"> Localiser</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger Java Edition</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger bedrock & Education</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </article>            
+                    </div>
+                    <div class="o-teasers__item">
+                        <article class="o-teaser
+                        o-teaser--hasImg o-teaser--hasTag">
+                            <a class="o-teaser__inner" href="#">
+                                <div class="o-teaser__img">
+                                    <img srcset="http://placeimg.com/708/398/arch 708w,
+                                    http://placeimg.com/400/225/nature 400w" sizes="(min-width: 48em) 400px,
+                                    708px" src="http://placeimg.com/708/398/nature" alt="">
+                                </div>
+                                <div class="o-teaser__content">
+
+
+                                    <h3 class="o-teaser__title">Jardin de l'Elysée</h3><p class="o-teaser__lead">Paris</p>
+                                    <div class="o-teasers__item_links">   
+                                        <p class="o-teasers__btn text-center">
+                                            <a href="#" class="btn btn--ghost btn--primary btn-active-effect btn-width--sm"> Localiser</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger Java Edition</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger bedrock & Education</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>            
+                    </div>
+                    <div class="o-teasers__item">
+                        <article class="o-teaser
+                        o-teaser--hasImg o-teaser--hasTag">
+                            <a class="o-teaser__inner" href="#">
+                                <div class="o-teaser__img">
+                                    <img srcset="http://placeimg.com/708/398/arch 708w,
+                                    http://placeimg.com/400/225/nature 400w" sizes="(min-width: 48em) 400px,
+                                    708px" src="http://placeimg.com/708/398/nature" alt="">
+                                </div>
+                                <div class="o-teaser__content">
+
+
+                                    <h3 class="o-teaser__title">Dune du Pilat</h3><p class="o-teaser__lead">Nouvelle-Aquitaine</p>
+                                    <div class="o-teasers__item_links">   
+                                        <p class="o-teasers__btn text-center">
+                                            <a href="#" class="btn btn--ghost btn--primary btn-active-effect btn-width--sm"> Localiser</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger Java Edition</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger bedrock & Education</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>            
+                    </div>
+                </div>
+                <div class="o-teasers__grid o-teasers--3by3">
+
+                    <div class="o-teasers__item">
+                        <article class="o-teaser
+                        o-teaser--hasImg o-teaser--hasTag">
+                            <a class="o-teaser__inner" href="#">
+                                <div class="o-teaser__img">
+                                    <img srcset="http://placeimg.com/708/398/arch 708w,
+                                    http://placeimg.com/400/225/nature 400w" sizes="(min-width: 48em) 400px,
+                                    708px" src="http://placeimg.com/708/398/nature" alt="">
+                                </div>
+                                <div class="o-teaser__content">
+                                    <h3 class="o-teaser__title">Parc de la tête d'or</h3><p class="o-teaser__lead"> Lyon</p>
+                                    <div class="o-teasers__item_links">   
+                                        <p class="o-teasers__btn text-center">
+                                            <a href="#" class="btn btn--ghost btn--primary btn-active-effect btn-width--sm"> Localiser</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger Java Edition</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger bedrock & Education</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </article>            
+                    </div>
+                    <div class="o-teasers__item">
+                        <article class="o-teaser
+                        o-teaser--hasImg o-teaser--hasTag">
+                            <a class="o-teaser__inner" href="#">
+                                <div class="o-teaser__img">
+                                    <img srcset="http://placeimg.com/708/398/arch 708w,
+                                    http://placeimg.com/400/225/nature 400w" sizes="(min-width: 48em) 400px,
+                                    708px" src="http://placeimg.com/708/398/nature" alt="">
+                                </div>
+                                <div class="o-teaser__content">
+
+
+                                    <h3 class="o-teaser__title">Jardin de l'Elysée</h3><p class="o-teaser__lead">Paris</p>
+                                    <div class="o-teasers__item_links">   
+                                        <p class="o-teasers__btn text-center">
+                                            <a href="#" class="btn btn--ghost btn--primary btn-active-effect btn-width--sm"> Localiser</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger Java Edition</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger bedrock & Education</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>            
+                    </div>
+                    <div class="o-teasers__item">
+                        <article class="o-teaser
+                        o-teaser--hasImg o-teaser--hasTag">
+                            <a class="o-teaser__inner" href="#">
+                                <div class="o-teaser__img">
+                                    <img srcset="http://placeimg.com/708/398/arch 708w,
+                                    http://placeimg.com/400/225/nature 400w" sizes="(min-width: 48em) 400px,
+                                    708px" src="http://placeimg.com/708/398/nature" alt="">
+                                </div>
+                                <div class="o-teaser__content">
+
+
+                                    <h3 class="o-teaser__title">Dune du Pilat</h3><p class="o-teaser__lead">Nouvelle-Aquitaine</p>
+                                    <div class="o-teasers__item_links">   
+                                        <p class="o-teasers__btn text-center">
+                                            <a href="#" class="btn btn--ghost btn--primary btn-active-effect btn-width--sm"> Localiser</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger Java Edition</a>
+                                        </p>
+                                        <p class="o-teasers__btn text-center">
+                                            <a class="btn btn--plain btn--primary btn-active-effect ">Télécharger bedrock & Education</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>            
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+
+
+            <div class="subfooter bg-gradient-primary text-white">
+            <div class="container-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="subfooter__title">La Newsletter</h2>
+                        <p class="subfooter__desc lead">Chaque trimestre, recevez par mail le meilleur de nos actualités !</p>
+                        
+                        <form class="newsletter" action ="" method ='post'>
+                            <div class="float-target-parent">
+                                <label for="newsletters">Saisissez votre adresse</label>
+                                <input type="text" class="form-control" id="in_newsletter">
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="btn btn--plain btn--primary btn-active-effect ">S'inscrire</button>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="subfooter__title">Suivez-nous</h2>
+                        <p class="subfooter__desc lead">L'IGN en temps réel sur les réseaux sociaux !</p>
+
+
+                        <div class="m-social">
+                            <ul class="m-social__list">
+                                <li class="m-social__item">
+                                    <a class="m-social__link" href="http://instagram.com" target="_blank"><span class="m-social__icon icon-instagram" aria-hidden="true"></span><p class="m-social__text"><span class="sr-only">instagram : </span><span class="m-social__nb">34k</span> followers</p></a>        
+                                </li>
+                                <li class="m-social__item">
+                                    <a class="m-social__link" href="http://twitter.com" target="_blank"><span class="m-social__icon icon-twitter" aria-hidden="true"></span><p class="m-social__text"><span class="sr-only">twitter : </span><span class="m-social__nb">34k</span> followers</p></a>        
+                                </li>
+                                <li class="m-social__item">
+                                    <a class="m-social__link" href="http://linkedin.com" target="_blank"><span class="m-social__icon icon-linkedin" aria-hidden="true"></span><p class="m-social__text"><span class="sr-only">linkedin : </span><span class="m-social__nb">34k</span> followers</p></a>        
+                                </li>
+                                <li class="m-social__item">
+                                    <a class="m-social__link" href="http://facebook.com" target="_blank"><span class="m-social__icon icon-facebook" aria-hidden="true"></span><p class="m-social__text"><span class="sr-only">facebook : </span><span class="m-social__nb">34k</span> followers</p></a>        
+                                </li>
+                            </ul>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+        </div>            
+        <div class="footer">
+            <div class="container-content">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <h2 class="footer-title">Où nous trouver</h2>
+
+                        <p class="footer-address">Institut National de l’Information Géographique et Forestière,<br>
+                            73 avenue de Paris,<br>
+                        94165 SAINT-MANDÉ CEDEX</p>
+
+                        <ul class="footer-list">
+                            <li class="footer-list-item">
+                                <a href="#">
+                                Nous contacter</a>
+                            </li>    
+                            <li class="footer-list-item">
+                                <a href="#">
+                                Toutes nos adresses</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h2 class="footer-title">Les portails</h2>
+
+                        <ul class="footer-list">
+                            <li class="footer-list-item footer-list-item--hasIcon">
+                                <a href="#">
+                                    <span class="footer-list-item__icon icon-user" aria-hidden="true"></span>Portail Particulier</a>
+                                </li>    
+                                <li class="footer-list-item footer-list-item--hasIcon">
+                                    <a href="#">
+                                        <span class="footer-list-item__icon icon-pro" aria-hidden="true"></span>Portail Professionnel long item Lorem ipsum dolor sit amet consectetur adipisicing elit</a>
+                                    </li>    
+                                    <li class="footer-list-item footer-list-item--hasIcon">
+                                        <a href="#">
+                                            <span class="footer-list-item__icon icon-map" aria-hidden="true"></span>Portail Carto</a>
+                                        </li>    
+                                        <li class="footer-list-item footer-list-item--hasIcon">
+                                            <a href="#" target="_blank">
+                                                <span class="footer-list-item__icon icon-ecosystem" aria-hidden="true"></span>Portail IGN.fr</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <h2 class="footer-title">Les accès rapides</h2>
+
+                                        <ul class="footer-list">
+                                            <li class="footer-list-item">
+                                                <a href="#">
+                                                Portail Particulier</a>
+                                            </li>    
+                                            <li class="footer-list-item">
+                                                <a href="#">
+                                                Portail Particulier</a>
+                                            </li>    
+                                            <li class="footer-list-item">
+                                                <a href="#">
+                                                Portail Particulier</a>
+                                            </li>    
+                                            <li class="footer-list-item">
+                                                <a href="#">
+                                                Portail Particulier</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <h2 class="footer-title">Les infos complémentaires</h2>
+
+                                        <ul class="footer-list">
+                                            <li class="footer-list-item">
+                                                <a href="#">
+                                                Portail Particulier</a>
+                                            </li>    
+                                            <li class="footer-list-item">
+                                                <a href="#">
+                                                Portail Particulier</a>
+                                            </li>   
+                                            <li class="footer-list-item">
+                                                <a href="#">
+                                                Portail Particulier</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <footer class="footer-contentinfo" role="contentinfo">
+                                    <p class="footer-copyright">&copy; IGN - 2020</p>
+
+                                    <ul class="footer-list footer-list--inline">
+                                        <li class="footer-list-item">
+                                            <a href="#">
+                                            Mentions légales</a>
+                                        </li>    
+                                        <li class="footer-list-item">
+                                            <a href="#">
+                                            Données personnelles</a>
+                                        </li>    
+                                        <li class="footer-list-item">
+                                            <a href="#" target="_blank">
+                                            Blank</a>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </div>
+                        </div>
+                        <div class="footer-logo">
+                            <div class="container-content">
+                                <img src="img/logo-republique-francaise.svg" alt="République Française - Liberté Egalité Fraternité">
+                            </div>
+                        </div>
+
+         <!--////////////////////////////-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.placeholder.min.js"></script>
+        <script type="text/javascript" src="js/ol.js"></script>
+        <script type="text/javascript" src="js/proj4.js"></script>
+        <script type="text/javascript" src="js/epsg-2154.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/bootstrap-slider.min.js"></script>
+        <!--<script type="text/javascript" src="js/jspanel.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap-select.min.js"></script>-->
+        
+
+        <script> // Prevent caching in order to avoid refresh problems
+            $.getScript("js/main.js?nocache=" + new Date().getTime());
+        </script>
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            _paq.push([function() {
+                var self = this;
+                function getOriginalVisitorCookieTimeout() {
+                    var now = new Date(),
+                    nowTs = Math.round(now.getTime() / 1000),
+                    visitorInfo = self.getVisitorInfo();
+                    var createTs = parseInt(visitorInfo[2]);
+                    var cookieTimeout = 33696000; // 13 mois en secondes
+                    var originalTimeout = createTs + cookieTimeout - nowTs;
+                    return originalTimeout;
+                }
+                this.setVisitorCookieTimeout( getOriginalVisitorCookieTimeout() );
+            }]);
+            (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.ign.fr/piwik/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', 38]);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="http://piwik.ign.fr/piwik/piwik.php?idsite=38" style="border:0;" alt="" /></p></noscript>
+        <!-- /Piwik -->
+    </html>
+</body>

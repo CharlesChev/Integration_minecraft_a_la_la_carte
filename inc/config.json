@@ -1,0 +1,37 @@
+{
+    "app_url": "http://minecraft.ignfab.com/",
+    "warehouse_url": "http://minecraftdl.ignfab.com/",
+    "app_path": "/var/www/html/",
+    "warehouse_path": "/var/www/html/",
+    "api_key": "nuguol8y5vwutxlr082k6voo",
+    "wmts_service_url": "https://wxs.ign.fr/$api_key/geoportail/wmts",
+    "wmts_service_version": "1.0.0",
+    "completion_provider": "ign",
+    "completion_service_url": {
+        "ign": "https://wxs.ign.fr/$api_key/ols/apis/completion",
+        "ban": "https://api-adresse.data.gouv.fr/search/"
+    },
+    "reverse_geocode_service_url": "https://api-adresse.data.gouv.fr/reverse/",
+    "projection": "EPSG:3857",
+    "default_location": [2.334112, 48.861458],
+    "default_zoom_level": 18,
+    "layers": [
+        {
+            "id": "ORTHOIMAGERY.ORTHOPHOTOS",
+            "style": "normal",
+            "format": "image/jpeg"
+        },
+        {
+            "id": "TRANSPORTNETWORKS.ROADS",
+            "style": "normal",
+            "format": "image/png"
+        },
+        {
+            "id": "GEOGRAPHICALGRIDSYSTEMS.MAPS.SCAN-EXPRESS.STANDARD",
+            "style": "normal",
+            "format": "image/jpeg"
+        }
+    ],
+    "generations_per_day": "140",
+    "generation_periods": "4"
+}
