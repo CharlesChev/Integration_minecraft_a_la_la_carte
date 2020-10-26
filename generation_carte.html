@@ -302,10 +302,12 @@ if($value != 0) {
                                     <input type="radio" id="customRadio4" name="customRadioTopo" class="custom-control-input">
                                     <label class="custom-control-label" for="customRadio4">France</label>
                                 </div>
+                                <p class ="relief">IGN ou SPw pour la France et la Wallonie</p>
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio5" name="customRadioTopo" class="custom-control-input">
                                     <label class="custom-control-label" for="customRadio5">Monde entier</label>
                                 </div>
+                                <p class ="relief">Open Street Map</p>
                                 <div class= 'optional_option'id='check_monde_entier'>
                                     <div class ='optional_content_wrapper'>
                                         <div class="custom-control custom-radio check_monde_entier">
@@ -316,8 +318,16 @@ if($value != 0) {
                                             <input type="radio" id="customRadio7" name="customRadioTopoOpt" class="custom-control-input">
                                             <label class="custom-control-label" for="customRadio7">Aléatoire</label>
                                         </div>
-                                        <legend>Hauteur</legend>
-                                        <input type="range" class="custom-range" min="1" max="2" step="0.1" id="EchelleRange">
+                                        <div class="aleatoire_max_min" id="aleatoire_max_min">
+                                            <legend>Hauteur min</legend>
+                                            <input type="range" class="custom-range" min="1" max="2" step="0.1" id="EchelleRange">
+                                            <legend>Hauteur max</legend>
+                                            <input type="range" class="custom-range" min="1" max="2" step="0.1" id="EchelleRange">
+                                        </div>
+                                        <div class = 'monde_entier_hauteur' id= 'monde_entier_hauteur'>
+                                            <legend>Hauteur</legend>
+                                            <input type="range" class="custom-range" min="1" max="2" step="0.1" id="EchelleRange">
+                                        </div>
                                         <div class = 'modal_button'>
                                             <button type="button" id ='button_topo'class= 'button_optional'>OK!</button>
                                         </div>
@@ -397,14 +407,23 @@ if($value != 0) {
                                     <input type="checkbox" class="custom-control-input" id="customCheck10">
                                     <label class="custom-control-label" for="customCheck10">J'accepte les conditions générales d'utilisation</label>
                                 </div>
-                                <div class="custom-control custom-radio ">
-                                    <input type="radio" id="moins15" name="age" class="custom-control-input">
-                                    <label class="custom-control-label" for="moins15"> J'ai moins de 15 ans</label>
-                                </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="15plus" name="age" class="custom-control-input">
-                                    <label class="custom-control-label" for="15plus">J'ai 15 ans ou plus</label>
+                                    <input type="radio" id="radio_15plus" name="age" class="custom-control-input">
+                                    <label class="custom-control-label" for="radio_15plus">J'ai 15 ans ou plus</label>
                                 </div>
+                                <div class="custom-control custom-radio ">
+                                    <input type="radio" id="radio_moins15" name="age" class="custom-control-input">
+                                    <label class="custom-control-label" for="radio_moins15"> J'ai moins de 15 ans</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkbox_plus15">
+                                        <label class="custom-control-label" for="checkbox_plus15">Je donne mon accord à l'IGN pour le traitement de mes données personnelles.</label>
+                                </div>
+                                <div class="custom-control custom-checkbox" id='age_moins15'>
+                                    <input type="checkbox" class="custom-control-input" id="checkbox_moins15">
+                                    <label class="custom-control-label" for="moins15_check">Le parent ou tuteur donne son accord à l'IGN pour le traitement des données personnelles de l'enfant.</label>
+                                </div>
+                                
                                 <div class ='modal_button'>
                                     <div class = 'submit-container'>
                                         <div class="form-group form-group-submit">
@@ -597,6 +616,7 @@ if($value != 0) {
         <script type="text/javascript" src="js/proj4.js"></script>
         <script type="text/javascript" src="js/epsg-2154.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src ="js/listes_correction.js"></script>
         <!--<script type="text/javascript" src="js/bootstrap-slider.min.js"></script>-->
         <!--<script type="text/javascript" src="js/jspanel.min.js"></script>
         <script type="text/javascript" src="js/bootstrap-select.min.js"></script>-->

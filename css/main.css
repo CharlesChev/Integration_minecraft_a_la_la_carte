@@ -68,9 +68,12 @@ body {
 	margin-left: 100px;
 }
 
-
 .relief, .format {
 	font-size: 10px;
+}
+
+.relief {
+	margin-bottom: 15px;
 }
 
 .newsletter {
@@ -247,6 +250,10 @@ body {
 	margin-top:20px;
 }
 
+#age_moins15 {
+	display:none;
+}
+
 /*modals options optinnelles*/
 .optional_option {
 	display:none;
@@ -272,6 +279,10 @@ body {
 	display: none;
 	left:300px;
 	bottom: 250px;
+}
+
+.aleatoire_max_min{
+	display:none;
 }
 
 #check_neige {

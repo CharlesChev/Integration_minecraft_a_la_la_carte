@@ -316,7 +316,15 @@ function setDefaultValues() {
             $('#button_topo').on("click", function(){
                 $('#check_monde_entier').css('display','none')
             });
-
+            /*Données topographiques -> Monde entier -> Aléatoire*/
+            $('#customRadio7').on("click", function(){
+                $('#aleatoire_max_min').css('display','block');   
+                $('#monde_entier_hauteur').css('display','none');
+            });
+            $('#customRadio6').on("click", function(){
+                $('#aleatoire_max_min').css('display','none');   
+                $('#monde_entier_hauteur').css('display','block'); 
+            });
             /*Neige*/
             $('#button_neige').on("click", function(){
                 $('#check_neige').css('display','none')
@@ -328,7 +336,6 @@ function setDefaultValues() {
                     $('#check_neige').css('display','none');
                 }
             });
-
             /*minetest, grand relief */
             $('#select_platform').change(function(){
                 if ($(this).children("option:selected").val() != ""){
