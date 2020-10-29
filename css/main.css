@@ -201,7 +201,7 @@ body {
 
 /*modal "dernière étape*/
 
-#derniere_etape_container, #merci_container{
+#derniere_etape_container, #merci_container, #error_modal{
 	position: fixed;
 	left: 0px;
 	top:0px;
@@ -211,7 +211,7 @@ body {
 	z-index:1;
 }
 
-#derniere_etape_content, #merci_content{
+#derniere_etape_content, #merci_content, #error_content {
 	background-color:#FFFFFF;
 	margin:10% auto;
 	width: 600px;
@@ -234,6 +234,7 @@ body {
 	padding-top: 20px;
 	margin-left: 20px;
 	margin-right: 20px;
+	padding-bottom: 10px;
 }
 
 .modal_button {
@@ -254,12 +255,35 @@ body {
 	display:none;
 }
 
+/*modal erreur */
+
+/* voir derniere_etape_container, #merci_container */
+#error_modal {
+	display: none;
+}
+
+.error {
+	color: red;
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+/*modal slider value*/
+#slider_value {
+	display:none;
+	background-color:#000000;
+	color:white;
+	border-radius: 5px;
+	position: absolute;
+}
+
 /*modals options optinnelles*/
 .optional_option {
 	display:none;
 	background-color:#FFFFFF;
 	border: 2px solid;
-	position: fixed;
+	position: relative;
 	width: 300px;
 	z-index: 2;
 }
