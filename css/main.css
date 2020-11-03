@@ -366,10 +366,6 @@ body {
 /* page génaration carte */
 
 	#ui_container {
-        display: block;
-    }
-
-    #map_container {
         display: none;
     }
 
