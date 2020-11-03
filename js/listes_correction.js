@@ -67,6 +67,55 @@ function errorModal(message ="Ceci est un message d'erreur") {
 	});
 };	
 
+/*event a sup après modal mis en responsive*/
 $('#testfonc').on("mouseenter",function () {
 	errorModal();
 });
+
+/*toogle ui_container/map en responsive*/
+/*if($(window).width() <= 768){
+		$('#ui_container').css("display","none");
+		$('#map_container').css("display","block");
+		$('#ui_map1').on("click",function(){
+			$('#map_container').css("display","none");
+			$('#ui_container').css("display","block");
+		});
+
+		$('#ui_map2').on("click",function(){
+			$('#map_container').css("display","block");
+			$('#ui_container').css("display","none");
+		});
+	}else {
+		$('#map_container').css("display","block");
+		$('#ui_container').css("display","block");
+	}
+
+$(window).resize(function(){
+	if($(window).width() <= 768){
+		$('#ui_container').css("display","none");
+		$('#map_container').css("display","block");
+		$('#ui_map1').on("click",function(){
+			$('#map_container').css("display","none");
+			$('#ui_container').css("display","block");
+		});
+
+		$('#ui_map2').on("click",function(){
+			$('#map_container').css("display","block");
+			$('#ui_container').css("display","none");
+		});
+	}else {
+		$('#map_container').css("display","block");
+		$('#ui_container').css("display","block");
+	}
+});*/
+
+
+
+
+/*$(window).resize(function(){
+	if($(window).width() > 768){
+		$('#map_container').css("display","block");
+		$('#ui_container').css("display","block");
+	};
+});*/
+

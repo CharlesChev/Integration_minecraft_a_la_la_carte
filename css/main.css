@@ -214,7 +214,8 @@ body {
 #derniere_etape_content, #merci_content, #error_content {
 	background-color:#FFFFFF;
 	margin:10% auto;
-	width: 600px;
+	width: 550px;
+	margin-top: 150px;
 }
 
 #derniere_etape_content{
@@ -283,7 +284,7 @@ body {
 	display:none;
 	background-color:#FFFFFF;
 	border: 2px solid;
-	position: relative;
+	position: absolute;
 	width: 300px;
 	z-index: 2;
 }
@@ -299,26 +300,14 @@ body {
 	margin: 10px;
 }
 
-#check_monde_entier {
+#check_monde_entier, #check_platform, #check_neige {
 	display: none;
 	left:300px;
-	bottom: 250px;
+	bottom: 100px;
 }
 
 .aleatoire_max_min{
 	display:none;
-}
-
-#check_neige {
-	display: none;
-	left:300px;
-	bottom: 250px;
-}
-
-#check_platform {
-	display: none;
-	left:300px;
-	bottom: 250px;
 }
 
 #relief{
@@ -326,6 +315,12 @@ body {
 }
 
 .grandRelief {
+	display: none;
+}
+
+/*bouton toggle carte/ui */
+
+.btn-group-toggle {
 	display: none;
 }
 
@@ -353,9 +348,28 @@ body {
 
 @media screen and (max-width: 768px){
 
+/*bouton switch */
+
+.btn-group-toggle {
+	display: block;
+	position: absolute;
+	top: 90px;
+	right: 10px;
+	background-color: #FFFFFF;
+
+}
+
+.btn-group-toggle {
+	background-color: #2dc398;
+	}
+
 /* page génaration carte */
 
 	#ui_container {
+        display: block;
+    }
+
+    #map_container {
         display: none;
     }
 
@@ -382,5 +396,33 @@ body {
 		margin-bottom: 30px;
 		width: 100%;
 	}
+
+}
+
+@media screen and (max-width: 576px){
+	.optional_option{
+		width:250px;
+	}
+
+	#check_neige, #check_monde_entier, #check_platform {
+		left:10px;
+		bottom: 100px;
+	}
+
+	#merci_content, #error_content {
+		width: 250px;
+	}
+
+	#derniere_etape_content {
+		width:100%;
+		height: 100%;
+		margin: 0;
+	}
+
+	.custom-checkbox, .custom-radio, .relief {
+		margin-left:50px;
+	}
+	
+
 
 }
