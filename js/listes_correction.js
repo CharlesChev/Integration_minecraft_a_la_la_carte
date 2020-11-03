@@ -73,7 +73,7 @@ $('#testfonc').on("mouseenter",function () {
 });
 
 /*toogle ui_container/map en responsive*/
-/*if($(window).width() <= 768){
+if($(window).width() <= 768){
 		$('#ui_container').css("display","none");
 		$('#map_container').css("display","block");
 		$('#ui_map1').on("click",function(){
@@ -107,15 +107,9 @@ $(window).resize(function(){
 		$('#map_container').css("display","block");
 		$('#ui_container').css("display","block");
 	}
-});*/
+});
 
 
 
 
-/*$(window).resize(function(){
-	if($(window).width() > 768){
-		$('#map_container').css("display","block");
-		$('#ui_container').css("display","block");
-	};
-});*/
 
