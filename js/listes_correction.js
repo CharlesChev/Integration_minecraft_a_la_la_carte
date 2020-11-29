@@ -67,10 +67,10 @@ function errorModal(message ="Ceci est un message d'erreur") {
 	});
 };	
 
-/*event a sup après modal mis en responsive*/
+/*event a sup après modal mis en responsive
 $('#testfonc').on("mouseenter",function () {
 	errorModal();
-});
+});*/
 
 /*toogle ui_container/map en responsive*/
 if($(window).width() <= 768){

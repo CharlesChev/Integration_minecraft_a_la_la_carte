@@ -82,10 +82,18 @@ body {
 }
 
 #in_newsletter {
-	width: 300px;
+	width: 260px;
 }
 
+/* fix bug zindex pour bouton "réglage" et "saissisez votre adresse */
 
+.float-target-parent label {
+	z-index:0 !important;
+}
+
+.btn-group > .btn:focus, .btn-group > .btn:active, .btn-group > .btn.active, .btn-group-vertical > .btn:focus, .btn-group-vertical > .btn:active, .btn-group-vertical > .btn.active {
+    z-index: 0 ! important;
+}
 /* page cartes prégénérées */
 
 .cartespregen {
