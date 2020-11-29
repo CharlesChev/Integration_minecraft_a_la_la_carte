@@ -202,212 +202,273 @@ function setDefaultValues() {
     $('#address_field').keyup(function() {
         findPlace($('#address_field').val());
     });
-    /*$('#email_field').keyup(function() {
-        var pattern = new RegExp(/^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i); // http://stackoverflow.com/a/2855946
-        if (pattern.test($('#email_field').val()) == false) {
-            $('#email_field').css('color', '#cc4b4b');
-        }
-        else {
-            $('#email_field').css('color', '#6ca66c');
-        }
-    });
-    $('#email_field_confirm').keyup(function() {
-        if ($('#email_field_confirm').val() != $('#email_field').val()) {
-            $('#email_field_confirm').css('color', '#cc4b4b');   
-        } else {
-            $('#email_field_confirm').css('color', '#6ca66c');
-        }
-    });
-    $('#email_field').focusout(function() {
-        setTimeout(function() {
-            if ($('#email_field').val().length > 0) {
-                $('#email_field').css('color', '#555');
-            } else {
-                $('#email_field').css('color', '#999');
-            }
-        }, 1000);
-    });
-    $('#email_field_confirm').focusout(function() {
-        setTimeout(function() {
-            if ($('#email_field_confirm').val().length > 0) {
-                $('#email_field_confirm').css('color', '#555');
-            } else {
-                $('#email_field_confirm').css('color', '#999');
-            }
-        }, 1000);
-    });
-    $('#captcha_response').keyup(function() {
-        checkCaptchaAndConsent();
-    });
-    $('input[name="age[]"],input[name="consentment[]"]').click(function() {
-        checkCaptchaAndConsent();
-    });
-    // Remove splashscreen / loading screen since we loaded everything
-    setTimeout(function() {
-        $('#splashscreen').fadeOut('slow');
-        if(window.location.hash=="#about") {  
-            $("#about-modal").modal();
-            popAboutSection();
-        }
-    }, 2000);*/
 });
 
 
-            /* script pour slide*/
-            const slide_un = $('#slide1');
-            const slide_deux = $('#slide2');
+//Travail de Charles
 
-            function slide() {
-                slide_un.toggle();
-                slide_deux.toggle();
+/* script pour slide*/
+const slide_un = $('#slide1');
+const slide_deux = $('#slide2');
+
+function slide() {
+    slide_un.toggle();
+    slide_deux.toggle();
+}
+
+/* script pour modal "dernière étape" */
+let btnGen = document.getElementById('genCarte');
+let btnCan = document.getElementById('cancel_button');
+let overlay = document.getElementById('derniere_etape_container');
+function openModal1(){
+    overlay.style.display = 'block';
+}
+function closeModal(){
+    overlay.style.display = 'none';
+}
+btnGen.addEventListener('click', openModal1);
+btnCan.addEventListener('click', closeModal);
+
+/*traitement du formulaire*/
+$(document).ready(function(){
+    setDefaultValues();
+
+    $("#retourPage").click(function(){
+        $("#merci_container").css("display","none");
+     }); 
+
+    $('#genCarteForm').on('submit',function(e){
+        e.preventDefault();
+        let $this = $(this);
+        $.ajax({
+            url: $this.attr('action'),
+            type: $this.attr('method'),
+            data: $this.serialize(),
+            dataType: 'json',
+            success: function(json){
+                if(json.response==='ok'){
+                    /*renvoie vers la page avec la popup qui pop*/              
+                }else{
+                    /*faire choses*/
+                }
             }
 
-            /* script pour modal "dernière étape" */
-            let btnGen = document.getElementById('genCarte');
-            let btnCan = document.getElementById('cancel_button');
-            let overlay = document.getElementById('derniere_etape_container');
-            function openModal1(){
-                overlay.style.display = 'block';
-            }
-            function closeModal(){
-                overlay.style.display = 'none';
-            }
-            btnGen.addEventListener('click', openModal1);
-            btnCan.addEventListener('click', closeModal);
+        })
+        $("#derniere_etape_container").css("display","none");
+        $("#merci_container").css("display","block");
+    })
+});
 
-            /*traitement du formulaire*/
-            $(document).ready(function(){
-                setDefaultValues();
+/*options présentes si d'autres sont cochées*/
+/*Données topographiques --> Monde entier*/
+$('#customRadio5').on("click", function(){
+    $('#check_monde_entier').css('display','block')
+});
+$('#customRadio4').on("click", function(){
+    $('#check_monde_entier').css('display','none')
+});
+$('#button_topo').on("click", function(){
+    $('#check_monde_entier').css('display','none')
+});
+/*Données topographiques -> Monde entier -> Aléatoire*/
+$('#customRadio7').on("click", function(){
+    $('#aleatoire_max_min').css('display','block');   
+    $('#monde_entier_hauteur').css('display','none');
+});
+$('#customRadio6').on("click", function(){
+    $('#aleatoire_max_min').css('display','none');   
+    $('#monde_entier_hauteur').css('display','block'); 
+});
+/*Neige*/
+$('#button_neige').on("click", function(){
+    $('#check_neige').css('display','none')
+});
+$('#customCheck7').change(function(){
+    if ($(this).is(':checked')){
+        $('#check_neige').css('display','block');
+    }else{
+        $('#check_neige').css('display','none');
+    }
+});
+/*minetest, grand relief */
+$('#select_platform').change(function(){
+    if ($(this).children("option:selected").val() != ""){
+        $('#check_platform').css('display','block');
+        
+        var java = '<option data-subtext="1.12.2" value="minecraft">Minecraft Java Edition</option>';
+        var bedrock = '<option data-subtext="1.2.10" value="bedrock">Minecraft Bedrock</option>';
+        var edu = '<option data-subtext="1.0.28" value="edu">Minecraft Education Edition</option>';
+        var minetest = '<option data-subtext="0.4.16" value="minetest">Minetest</option>';
 
-                $("#retourPage").click(function(){
-                    $("#merci_container").css("display","none");
-                 }); 
+        var gamePlatform = $(this).children("option:selected").val();
+        var gameFormat = $('#select_format');
 
-                $('#genCarteForm').on('submit',function(e){
-                    e.preventDefault();
-                    let $this = $(this);
-                    $.ajax({
-                        url: $this.attr('action'),
-                        type: $this.attr('method'),
-                        data: $this.serialize(),
-                        dataType: 'json',
-                        success: function(json){
-                            if(json.response==='ok'){
-                                /*renvoie vers la page avec la popup qui pop*/              
-                            }else{
-                                /*faire choses*/
-                            }
-                        }
+        gameFormat.find('option')
+        .remove()
+        .end();
 
-                    })
-                    $("#derniere_etape_container").css("display","none");
-                    $("#merci_container").css("display","block");
-                })
-            });
+        switch(gamePlatform) {
+            case 'windows10':
+                gameFormat.append(java);
+                gameFormat.append(bedrock);
+                gameFormat.append(edu);
+                gameFormat.append(minetest);
+                break;
+            case 'windows7': case 'linux':
+                gameFormat.append(java);
+                gameFormat.append(minetest);
+                break;
+            case 'mac':
+                gameFormat.append(java);
+                break;
+            case 'xboxone':
+            case 'ios': case 'android':
+                gameFormat.append(bedrock);
+                break;
 
-            /*options présentes si d'autres sont cochées*/
-            /*Données topographiques --> Monde entier*/
-            $('#customRadio5').on("click", function(){
-                $('#check_monde_entier').css('display','block')
-            });
-            $('#customRadio4').on("click", function(){
-                $('#check_monde_entier').css('display','none')
-            });
-            $('#button_topo').on("click", function(){
-                $('#check_monde_entier').css('display','none')
-            });
-            /*Données topographiques -> Monde entier -> Aléatoire*/
-            $('#customRadio7').on("click", function(){
-                $('#aleatoire_max_min').css('display','block');   
-                $('#monde_entier_hauteur').css('display','none');
-            });
-            $('#customRadio6').on("click", function(){
-                $('#aleatoire_max_min').css('display','none');   
-                $('#monde_entier_hauteur').css('display','block'); 
-            });
-            /*Neige*/
-            $('#button_neige').on("click", function(){
-                $('#check_neige').css('display','none')
-            });
-            $('#customCheck7').change(function(){
-                if ($(this).is(':checked')){
-                    $('#check_neige').css('display','block');
-                }else{
-                    $('#check_neige').css('display','none');
-                }
-            });
-            /*minetest, grand relief */
-            $('#select_platform').change(function(){
-                if ($(this).children("option:selected").val() != ""){
-                    $('#check_platform').css('display','block');
-                    
-                    var java = '<option data-subtext="1.12.2" value="minecraft">Minecraft Java Edition</option>';
-                    var bedrock = '<option data-subtext="1.2.10" value="bedrock">Minecraft Bedrock</option>';
-                    var edu = '<option data-subtext="1.0.28" value="edu">Minecraft Education Edition</option>';
-                    var minetest = '<option data-subtext="0.4.16" value="minetest">Minetest</option>';
+        }
+    }
+});
 
-                    var gamePlatform = $(this).children("option:selected").val();
-                    var gameFormat = $('#select_format');
+$('#button_platform').on("click", function(){
+    $('#check_platform').css('display','none')
+});
 
-                    gameFormat.find('option')
-                    .remove()
-                    .end();
+$('#relief').change(function(){
+    if ($(this).is(':checked')){
+        $('.grandRelief').css('display','block');
+    }else{
+        $('.grandRelief').css('display','none');
+    }
+});
 
-                    switch(gamePlatform) {
-                        case 'windows10':
-                            gameFormat.append(java);
-                            gameFormat.append(bedrock);
-                            gameFormat.append(edu);
-                            gameFormat.append(minetest);
-                            break;
-                        case 'windows7': case 'linux':
-                            gameFormat.append(java);
-                            gameFormat.append(minetest);
-                            break;
-                        case 'mac':
-                            gameFormat.append(java);
-                            break;
-                        case 'xboxone':
-                        case 'ios': case 'android':
-                            gameFormat.append(bedrock);
-                            break;
+$('#select_format').change(function(){
+    let mine = $(this).children("option:selected").val();
+    if (mine == 'minetest'){
+        $('#relief').removeAttr("disabled");
+    }else{
+        $('#relief').attr("disabled", true);
+        $("#relief").prop("checked", false);
+        $('.grandRelief').css('display','none');
+    }
+});
 
-                    }
-                }
-            });
+$('#select_format').change(function(){
+    let mine = $(this).children("option:selected").val();
+    if (mine == 'minetest'){
+        $('#relief').removeAttr("disabled");
+    }else{
+        $('#relief').attr("disabled", true);
+        $("#relief").prop("checked", false);
+        $('.grandRelief').css('display','none');
+    }
+    
+});
 
-            $('#button_platform').on("click", function(){
-                $('#check_platform').css('display','none')
-            });
+ /*Données topographiques -> Monde entier -> Aléatoire*/
+$('#customRadio7').on("click", function(){
+    $('#aleatoire_max_min').css('display','block');   
+    $('#monde_entier_hauteur').css('display','none');
+});
+$('#customRadio6').on("click", function(){
+    $('#aleatoire_max_min').css('display','none');   
+    $('#monde_entier_hauteur').css('display','block'); 
+});
 
-            $('#relief').change(function(){
-                if ($(this).is(':checked')){
-                    $('.grandRelief').css('display','block');
-                }else{
-                    $('.grandRelief').css('display','none');
-                }
-            });
 
-            $('#select_format').change(function(){
-                let mine = $(this).children("option:selected").val();
-                if (mine == 'minetest'){
-                    $('#relief').removeAttr("disabled");
-                }else{
-                    $('#relief').attr("disabled", true);
-                    $("#relief").prop("checked", false);
-                    $('.grandRelief').css('display','none');
-                }
-            });
 
-            $('#select_format').change(function(){
-                let mine = $(this).children("option:selected").val();
-                if (mine == 'minetest'){
-                    $('#relief').removeAttr("disabled");
-                }else{
-                    $('#relief').attr("disabled", true);
-                    $("#relief").prop("checked", false);
-                    $('.grandRelief').css('display','none');
-                }
-                
-            });
+/*checkbox consentement données perso*/
+$("#radio_15plus").on("click", function(){
+    $('#age_moins15').css('display','none');
+    $('#derniere_etape_content').css('height','500px');
+});
+$("#radio_moins15").on("click", function(){
+    $('#age_moins15').css('display','block');
+    $('#derniere_etape_content').css('height','560px');
+});
+
+/*/////////////////////////////////////////////*/
+/*a terminé*/
+/*afficheage bulle sliders*/
+$('#echelleRange').on('mouseenter',function(){
+    $('#slider_value').css('display','block');
+});
+$('#echelleRange').on('mouseleave',function(){
+    $('#slider_value').css('display','none');
+});
+
+
+$("#echelleRange").on("change", function(){
+    var val = $('#echelleRange').val();
+    $("#slider_value").text(val);
+
+    var left = $('#echelleRange')['0']['offsetLeft'];
+    var top = $('#echelleRange')['0']['offsetTop'];
+    var max = $('#echelleRange').attr('max');
+    var min = $('#echelleRange').attr('min');
+    var step = $('#echelleRange').attr('step');
+
+    topPos = top - 10;
+    console.log(topPos);
+    topPos = topPos.toString();
+    console.log(topPos);
+
+    $('#slider_value').css('top',topPos+'px');
+
+    console.log(left);
+    console.log(top);
+    console.log(min);
+    console.log(max);
+    console.log(step);
+    console.log($('#echelleRange'));
+
+});
+
+
+function errorModal(message ="Ceci est un message d'erreur") {
+    $('#error_modal').html('<div id = error_content><div class = "modal_content_wrapper"><div class = "error"><p>'+message+'</p></div> <div class = "modal_button"><button type="button" id ="button_error"class= "button_optional">Fermer</button></div></div></div>');
+    $("#error_modal").css("display","block");
+    $("#button_error").on("click", function(){
+        $("#error_modal").css("display","none");
+    });
+};  
+
+
+/*toogle ui_container/map en responsive*/
+if($(window).width() <= 768){
+        $('#ui_container').css("display","none");
+        $('#map_container').css("display","block");
+        $('#ui_map1').on("click",function(){
+            $('#map_container').css("display","none");
+            $('#ui_container').css("display","block");
+        });
+
+        $('#ui_map2').on("click",function(){
+            $('#map_container').css("display","block");
+            $('#ui_container').css("display","none");
+        });
+    }else {
+        $('#map_container').css("display","block");
+        $('#ui_container').css("display","block");
+    }
+
+$(window).resize(function(){
+    if($(window).width() <= 768){
+        $('#ui_container').css("display","none");
+        $('#map_container').css("display","block");
+        $('#ui_map1').on("click",function(){
+            $('#map_container').css("display","none");
+            $('#ui_container').css("display","block");
+        });
+
+        $('#ui_map2').on("click",function(){
+            $('#map_container').css("display","block");
+            $('#ui_container').css("display","none");
+        });
+    }else {
+        $('#map_container').css("display","block");
+        $('#ui_container').css("display","block");
+    }
+});
+
                 
